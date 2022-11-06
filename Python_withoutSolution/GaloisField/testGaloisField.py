@@ -92,23 +92,23 @@ Question1_3()
 
 print('powers of the generator:\n')
 # print all powers of a
+def Question1_4():
+    a=int('0x03',16)
+    b=a
+    F256 = set() 
+    for i in range(256):
+        if i == 0:
+            tmp=int('0x01',16)
+            F256.add(tmp)
+        else:
+            b=gf.mul_xtime(b,a)
+            F256.add((b))
+        print('a^',i,'=',hex(b),'\n')
 
-a=int('0x03',16)
-b=a
-F256 = set() 
-for i in range(256):
-    if i == 0:
-        tmp=int('0x01',16)
-        F256.add(tmp)
-    else:
-        b=gf.mul_xtime(b,a)
-        F256.add(hex(b))
-    print('a^',i,'=',hex(b),'\n')
+    print((F256)) # contains all integers from 1 to 255  
 
-print(len(F256)) # returns 256, so 
-
+Question1_4()
 raise ValueError()
-
 ################################################################################
 # Galois Field F_256 parameters using irreducible polynomial m(x)=x^8+x^4x^3+x+1
 ################################################################################
