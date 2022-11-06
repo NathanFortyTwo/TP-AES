@@ -52,7 +52,7 @@ def Question1_1():
     for k in array:
         print(k)
 
-#Question1_1() 
+Question1_1() 
 ################################################################################
 # Example of addition in F_256
 ################################################################################
@@ -69,7 +69,6 @@ def Question1_2():
     print(res)
 
 Question1_2()
-raise ValueError()
 
 ################################################################################
 # Example of slow multiplication in F_256 using xtime()
@@ -81,6 +80,13 @@ b2=int('0x83',16)
 # print a2*b2='0xc1' in hex form
 """FILL IN MISSING CODE"""
 
+def Question1_3():
+    res = gf.mul_xtime(a2,b2)
+    print(hex(res))
+
+Question1_3()
+
+raise ValueError()
 ################################################################################
 # Show that a='0x03' generates F_256
 ################################################################################
