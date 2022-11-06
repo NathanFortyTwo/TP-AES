@@ -86,20 +86,28 @@ def Question1_3():
 
 Question1_3()
 
-raise ValueError()
 ################################################################################
 # Show that a='0x03' generates F_256
 ################################################################################
-a=int('0x03',16)
+
 print('powers of the generator:\n')
-# print all powers of a 
+# print all powers of a
+
+a=int('0x03',16)
+b=a
+F256 = set() 
 for i in range(256):
     if i == 0:
         tmp=int('0x01',16)
+        F256.add(tmp)
     else:
-        """FILL IN MISSING CODE"""
-        
-    print('a^',i,'=',hex(tmp),'\n')
+        b=gf.mul_xtime(b,a)
+        F256.add(hex(b))
+    print('a^',i,'=',hex(b),'\n')
+
+print(len(F256)) # returns 256, so 
+
+raise ValueError()
 
 ################################################################################
 # Galois Field F_256 parameters using irreducible polynomial m(x)=x^8+x^4x^3+x+1
