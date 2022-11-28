@@ -28,7 +28,6 @@ def Generate_Logtable_Alogtable():
    
    for i in range(254):
     index= gf.mul_xtime(index,g)
-    print("index ",index)
     Logtable[index %256]=i+2
     Alogtable[i+2]=index%256
 
@@ -146,10 +145,8 @@ a2=int('0x57',16)
 # b2='0x83' in hexadecimal form converted to integer form
 b2=int('0x83',16)
 # print a2*b2='0xc1' in hex form
-"""FILL IN MISSING CODE"""
-print(gf.mul(a2,b2))
-print(Question1_3())
-raise ValueError()
+
+print("a2*b2",gf.mul(a2,b2))
 
 ################################################################################
 # Example of fast inversion in F_256 using Logtable() and Alogtable()
@@ -157,6 +154,7 @@ raise ValueError()
 # a='0x83' in hexadecimal form converted to integer form
 a=int('0x83',16)
 a_inv=gf.inv(a)
+
 # print a^{-1}='0x80'
 print("a^{-1}=",hex(a_inv))
 
@@ -170,6 +168,3 @@ b=int('0x83',16)
 res=gf.div(a,b)
 # print a/b='0x80'
 print("a/b=",hex(res))
-
-
-

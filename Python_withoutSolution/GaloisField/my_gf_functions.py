@@ -125,11 +125,14 @@ def mul(a,b):
 #
 ####################################################################
 def inv(a):
+   from testGaloisField import Generate_Logtable_Alogtable
+   logTable, aLogTable = Generate_Logtable_Alogtable()
    # 0^{-1}=0 by convention in AES
    if a==0:
       return 0
    else:
-      return """FILL IN MISSING CODE"""
+      indice_a = logTable[a]
+      return aLogTable[255-indice_a]
 
 #####################################################################
 #
@@ -145,4 +148,5 @@ def inv(a):
 #
 ####################################################################
 def div(a,b):
-   return """FILL IN MISSING CODE"""
+   b_inv = inv(b)
+   return mul(a,b_inv)
