@@ -20,11 +20,24 @@ def Generate_Logtable_Alogtable():
    g=int('0x03',16)
    # initialize Logtable
    Logtable=np.zeros(256,dtype='int')
-
-   # initialize inverse Logtable
    Alogtable=np.zeros(256,dtype='int')
+   
+   
+   index = g
 
-   """FILL IN MISSING CODE"""
+   
+   for i in range(254):
+    index= gf.mul_xtime(index,g)
+    print("index ",index)
+    Logtable[index %256]=i+2
+    Alogtable[i+2]=index%256
+
+        
+   Alogtable[0]=1
+   Alogtable[1]=g
+   Logtable[1] = 0
+   
+   Logtable[3] = 1
 
    return Logtable,Alogtable
 
@@ -108,7 +121,7 @@ def Question1_4():
     print((F256)) # contains all integers from 1 to 255  
 
 Question1_4()
-raise ValueError()
+
 ################################################################################
 # Galois Field F_256 parameters using irreducible polynomial m(x)=x^8+x^4x^3+x+1
 ################################################################################
@@ -124,7 +137,8 @@ for i in range(256):
     print('Alogtable[',i,']=',Alogtable[i])
     if i%16==15:
         print('\n')
-    
+
+raise ValueError()
 ################################################################################
 # Example of fast multiplication in F_256 using Logtable() and Alogtable()
 ################################################################################
