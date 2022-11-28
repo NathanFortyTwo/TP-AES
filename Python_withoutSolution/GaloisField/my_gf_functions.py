@@ -105,7 +105,11 @@ def mul_xtime(a,b):
 ####################################################################
 def mul(a,b):
    """FILL IN MISSING CODE"""
-
+   from testGaloisField import Generate_Logtable_Alogtable
+   logTable,aLogTable = Generate_Logtable_Alogtable()
+   indice_a = logTable[a]
+   indice_b = logTable[b]
+   res = aLogTable[indice_a+indice_b]
    return res
 
 #####################################################################

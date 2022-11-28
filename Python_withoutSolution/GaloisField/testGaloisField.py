@@ -36,7 +36,7 @@ def Generate_Logtable_Alogtable():
    Alogtable[0]=1
    Alogtable[1]=g
    Logtable[1] = 0
-   
+
    Logtable[3] = 1
 
    return Logtable,Alogtable
@@ -138,7 +138,6 @@ for i in range(256):
     if i%16==15:
         print('\n')
 
-raise ValueError()
 ################################################################################
 # Example of fast multiplication in F_256 using Logtable() and Alogtable()
 ################################################################################
@@ -148,6 +147,9 @@ a2=int('0x57',16)
 b2=int('0x83',16)
 # print a2*b2='0xc1' in hex form
 """FILL IN MISSING CODE"""
+print(gf.mul(a2,b2))
+print(Question1_3())
+raise ValueError()
 
 ################################################################################
 # Example of fast inversion in F_256 using Logtable() and Alogtable()
