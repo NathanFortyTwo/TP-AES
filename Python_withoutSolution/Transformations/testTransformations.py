@@ -15,7 +15,8 @@ import my_transformations_functions as transfo
 print('\nTabular representation of Sbox(a)')  
 for a in range(256):
     print('a=',hex(a),hex(transfo.Sbox(a)))
-  
+
+
 ################################################################################
 # Tabular representation of InvSbox
 # Tab. C.1 p. 211 in Daemen and Rijnen, "The design of Rijndael," Springer 2002 
@@ -47,7 +48,6 @@ print(np.array([[hex(l) for l in row] for row in tmp]))
 state=transfo.InvShiftRows(tmp)
 print('After Inverse Shift row:')
 print(np.array([[hex(l) for l in row] for row in state]))
-
 ################################################################################
 # check that shared.Minv is the inverse matrix of shared.M in F_256
 ################################################################################
@@ -79,7 +79,6 @@ print(np.array([[hex(l) for l in row] for row in tmp]))
 state=transfo.InvMixColumn(tmp)
 print('After Inverse Mix column :')
 print(np.array([[hex(l) for l in row] for row in state]))
-
 
 ################################################################################
 # test KeyExpansion()
@@ -119,6 +118,7 @@ for rd in range(ROUNDS+1):
 original_message1=np.array([int('0x01',16),int('0x23',16),int('0x45',16),int('0x67',16),int('0x89',16),int('0xab',16),int('0xcd',16),int('0xef',16),int('0xfe',16),int('0xdc',16),int('0xba',16),int('0x98',16),int('0x76',16),int('0x54',16),int('0x32',16),int('0x10',16)],dtype='int')
 # original key 1 as a vector of bytes in integer form
 original_key1=np.array([int('0x0f',16),int('0x15',16),int('0x71',16),int('0xc9',16),int('0x47',16),int('0xd9',16),int('0xe8',16),int('0x59',16),int('0x0c',16),int('0xb7',16),int('0xad',16),int('0xd6',16),int('0xaf',16),int('0x7f',16),int('0x67',16),int('0x98',16)],dtype='int')
+original_key1[1]+=1 ## TODO CHANGE HERE
 
 # original message 2: flip 8-th bit wrt message 1 - p. 198 Table 6.5
 original_message2=np.array([int('0x00',16),int('0x23',16),int('0x45',16),int('0x67',16),int('0x89',16),int('0xab',16),int('0xcd',16),int('0xef',16),int('0xfe',16),int('0xdc',16),int('0xba',16),int('0x98',16),int('0x76',16),int('0x54',16),int('0x32',16),int('0x10',16)],dtype='int')

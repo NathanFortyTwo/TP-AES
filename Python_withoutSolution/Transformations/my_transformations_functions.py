@@ -103,16 +103,22 @@ def InvShiftRows(state):
 #
 ################################################################################
 def MixColumn(state):
-    transfo_state=np.zeros((4,4),dtype='int')
-    
+    state = state.transpose()
+    transfo_state = np.full([4,4],1,dtype='int64')
+    transfo_state += np.diag([1,1,1,1])
+
+    transfo_state[0,1] = 3
+    transfo_state[1,2] = 3
+    transfo_state[2,3] = 3
+    transfo_state[3,0] = 3
+    res = np.zeros([4,4],dtype = 'int')
     for l in range(4):
         for c in range(4):
-            # loop on the elements in the column
             for k in range(4):
-                transfo_state[l,c]=\
-                    """FILL IN MISSING CODE"""
-    
-    return transfo_state
+                res[l,c]+=int(gf.mul(transfo_state[l,k],state[k,c]))
+
+    return res
+
 
 ################################################################################
 #
@@ -132,8 +138,7 @@ def InvMixColumn(state):
         for c in range(4):
             # loop on the elements in the column
             for k in range(4):
-                transfo_state[l,c]=\
-                    """FILL IN MISSING CODE"""
+                transfo_state[l,c]=0
     
     return transfo_state
 

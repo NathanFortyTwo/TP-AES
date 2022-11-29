@@ -109,7 +109,7 @@ def mul(a,b):
    logTable,aLogTable = Generate_Logtable_Alogtable()
    indice_a = logTable[a]
    indice_b = logTable[b]
-   res = aLogTable[indice_a+indice_b]
+   res = aLogTable[(indice_a+indice_b)%256]
    return res
 
 #####################################################################

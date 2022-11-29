@@ -4,6 +4,7 @@
 import shared_constants as shared
 # import numpy package
 import numpy as np
+from shared_constants import Logtable,Alogtable
 
 #####################################################################
 #
@@ -105,7 +106,10 @@ def mul_xtime(a,b):
 ####################################################################
 def mul(a,b):
    """FILL IN MISSING CODE"""
-
+   
+   indice_a = Logtable[a]
+   indice_b = Logtable[b]
+   res = Alogtable[(indice_a+indice_b)%256]
    return res
 
 #####################################################################
@@ -121,11 +125,13 @@ def mul(a,b):
 #
 ####################################################################
 def inv(a):
+
    # 0^{-1}=0 by convention in AES
    if a==0:
       return 0
    else:
-      return """FILL IN MISSING CODE"""
+      indice_a = Logtable[a]
+      return Alogtable[255-indice_a]
 
 #####################################################################
 #
@@ -141,4 +147,5 @@ def inv(a):
 #
 ####################################################################
 def div(a,b):
-   return """FILL IN MISSING CODE"""
+   b_inv = inv(b)
+   return mul(a,b_inv)

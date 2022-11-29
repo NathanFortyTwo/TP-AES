@@ -168,3 +168,7 @@ b=int('0x83',16)
 res=gf.div(a,b)
 # print a/b='0x80'
 print("a/b=",hex(res))
+
+
+
+print("0B * 2 = ", gf.mul(int("0x1B",16),2))
