@@ -49,6 +49,7 @@ def Encrypt(plaintext,key,ROUNDS):
 
     # APPLY ROUND#1 TO #ROUNDS-1:
     for rd in range(1,ROUNDS):
+        
         # copy state at previous round
         state[rd,:,:]=state[rd-1,:,:]
         # Byte Substitution transformation
@@ -61,9 +62,11 @@ def Encrypt(plaintext,key,ROUNDS):
         state[rd,:,:]=transfo.MixColumn(state[rd,:,:])
         # Add current round key
         state[rd,:,:]=transfo.AddRoundKey(state[rd,:,:],rk[rd,:,:])
+        print("STATE",state)
 
     # APPLY LAST ROUND (same but without Mix Columns transformation)
     """FILL IN MISSING CODE"""
+    rd+=1
     state[rd,:,:]=state[rd-1,:,:]
     # Byte Substitution transformation
     for l in range(4):
@@ -71,7 +74,6 @@ def Encrypt(plaintext,key,ROUNDS):
             state[rd,l,c]=transfo.Sbox(state[rd,l,c])
     # Shift Rows transformation
     state[rd,:,:]=transfo.ShiftRows(state[rd,:,:])
-    # Add current round key
     state[rd,:,:]=transfo.AddRoundKey(state[rd,:,:],rk[rd,:,:])
 
     """END OF MISSING CODE"""
@@ -128,6 +130,7 @@ def Decrypt(cyphertext,key,ROUNDS):
     for l in range(4):
         for c in range(4):
             state[rd,l,c]=transfo.InvSbox(state[rd,l,c])
+
     """END OF MISSING CODE"""
     # INVERT #ROUNDS-1 TO ROUND#1:
     for rd in range(ROUNDS-1,0,-1):

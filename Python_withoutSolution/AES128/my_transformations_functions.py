@@ -109,22 +109,15 @@ def MixColumn(state):
         output = np.zeros([4])
         for i in range(4):
             s=0
-            for j in range(4):
-                s+= gf.mul(A[i,j],B[j])
+            for k in range(4):
+                s+= gf.mul(A[i,k],B[k])
             output[i] = s
 
         return output.transpose()
 
 
     #create transformation matrix
-    transfo_state = np.array([[2,3,1,1],
-                            [1,2,3,1],
-                            [1,1,2,3],
-                            [3,1,1,2]],
-                        dtype = "int64")
-    for i in range(4):
-        for j in range(4):
-            transfo_state[i,j] = int(f"0x0{transfo_state[i,j]}",base=16)
+    transfo_state = shared.M
     output_cols=[]
 
     columns = state.transpose()[:]
@@ -151,15 +144,30 @@ def MixColumn(state):
 #
 ################################################################################
 def InvMixColumn(state):
-    transfo_state=np.zeros((4,4),dtype='int')
-    
-    for l in range(4):
-        for c in range(4):
-            # loop on the elements in the column
+
+    def custom_product(A,B):
+        #define matrix multiplication with size 4, and 4,4 within F256
+        output = np.zeros([4])
+        for i in range(4):
+            s=0
             for k in range(4):
-                transfo_state[l,c]=0
+                s+= gf.mul(A[k],B[i,k])
+            output[i] = s
+        return output.transpose()
+
     
-    return transfo_state
+
+    transfo_state=shared.Minv
+    output_cols=[]
+    columns = state.transpose()[:] # get co
+    for column in columns:
+        output_col = custom_product(column,transfo_state)
+        output_cols.append(output_col)
+        # we got list of columns
+
+    res = np.array(output_cols) 
+    res.transpose() # we concatenate columns and transpose to get result
+    return res
 
 ################################################################################
 #

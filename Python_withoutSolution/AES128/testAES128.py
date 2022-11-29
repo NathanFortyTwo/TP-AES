@@ -67,6 +67,7 @@ if sum==0:
 else:
     print('encryption/decryption for original_message2 is incorrect!')
 
+
 ################################################################################
 # Test the AES128 avalanche effect by modifying 1 key bit using the same message
 ################################################################################
