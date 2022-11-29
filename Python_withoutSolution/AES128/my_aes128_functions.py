@@ -71,7 +71,10 @@ def Encrypt(plaintext,key,ROUNDS):
             state[rd,l,c]=transfo.Sbox(state[rd,l,c])
     # Shift Rows transformation
     state[rd,:,:]=transfo.ShiftRows(state[rd,:,:])
-    """END MISSING CODE"""
+    # Add current round key
+    state[rd,:,:]=transfo.AddRoundKey(state[rd,:,:],rk[rd,:,:])
+
+    """END OF MISSING CODE"""
 
     # REFORMAT 4x4 final state matrix to cyphertext in vector form
     for c in range(4):
@@ -118,6 +121,8 @@ def Decrypt(cyphertext,key,ROUNDS):
 
     # INVERT LAST ROUND (without Inverse Mix Columns transformation)
     """FILL IN MISSING CODE"""
+    # Remove current round key (AddRoundKey is equal to its inverse)
+    state[rd,:,:]=transfo.AddRoundKey(state[rd,:,:],rk[rd,:,:])
     state[rd,:,:]=transfo.InvShiftRows(state[rd,:,:])
     # Byte Substitution Inverse transformation
     for l in range(4):

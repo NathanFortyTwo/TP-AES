@@ -105,7 +105,6 @@ def mul_xtime(a,b):
 #
 ####################################################################
 def mul(a,b):
-   """FILL IN MISSING CODE"""
    
    indice_a = Logtable[a]
    indice_b = Logtable[b]
@@ -130,7 +129,7 @@ def inv(a):
    if a==0:
       return 0
    else:
-      indice_a = Logtable[a]
+      indice_a = Logtable[a%256]
       return Alogtable[255-indice_a]
 
 #####################################################################
