@@ -103,16 +103,41 @@ def InvShiftRows(state):
 #
 ################################################################################
 def MixColumn(state):
-    transfo_state=np.zeros((4,4),dtype='int')
-    
-    for l in range(4):
-        for c in range(4):
-            # loop on the elements in the column
-            for k in range(4):
-                transfo_state[l,c]=\
-                    """FILL IN MISSING CODE"""
-    
-    return transfo_state
+    def custom_product(A,B):
+        #define matrix multiplication with size 4,4 and 4,1 within F256
+
+        output = np.zeros([4])
+        for i in range(4):
+            s=0
+            for j in range(4):
+                s+= gf.mul(A[i,j],B[j])
+            output[i] = s
+
+        return output.transpose()
+
+
+    #create transformation matrix
+    transfo_state = np.array([[2,3,1,1],
+                            [1,2,3,1],
+                            [1,1,2,3],
+                            [3,1,1,2]],
+                        dtype = "int64")
+    for i in range(4):
+        for j in range(4):
+            transfo_state[i,j] = int(f"0x0{transfo_state[i,j]}",base=16)
+    output_cols=[]
+
+    columns = state.transpose()[:]
+    for column in columns:
+        output_col = custom_product(transfo_state,column)
+        output_cols.append(output_col)
+        # we got list of columns
+
+    res = np.array(output_cols) 
+    res.transpose() # we concatenate columns and transpose to get result
+
+    return res
+
 
 ################################################################################
 #
@@ -132,8 +157,7 @@ def InvMixColumn(state):
         for c in range(4):
             # loop on the elements in the column
             for k in range(4):
-                transfo_state[l,c]=\
-                    """FILL IN MISSING CODE"""
+                transfo_state[l,c]=0
     
     return transfo_state
 
